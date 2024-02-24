@@ -1,0 +1,108 @@
+dataset:
+  name: DalesRandlanet4_12
+  cache_dir: ./logs/cache
+  dataset_path: ./dales/all
+  class_weights: [6997560., 178021561., 120818120., 2583281., 748890., 799886., 1512927., 276924., 56908533.]
+  ignored_label_inds:
+  - 0
+  num_classes: 9
+  num_points: 65536
+  test_files:
+  - 5100_54440.ply
+  - 5100_54490.ply
+  - 5135_54430.ply
+  - 5140_54390.ply
+  - 5080_54470.ply
+  - 5150_54325.ply
+  - 5135_54435.ply
+  - 5155_54335.ply
+  - 5175_54395.ply
+  - 5120_54445.ply
+  - 5080_54400.ply
+  test_result_folder: ./test
+  train_files:
+  - 5145_54460.ply
+  - 5100_54495.ply
+  - 5180_54435.ply
+  - 5185_54485.ply
+  - 5095_54455.ply
+  - 5190_54400.ply
+  - 5145_54480.ply
+  - 5160_54330.ply
+  - 5130_54355.ply
+  - 5095_54440.ply
+  - 5145_54340.ply
+  - 5085_54320.ply
+  - 5135_54495.ply
+  - 5145_54405.ply
+  - 5150_54340.ply
+  - 5140_54445.ply
+  - 5185_54390.ply
+  - 5145_54470.ply
+  - 5110_54495.ply
+  - 5115_54480.ply
+  - 5165_54390.ply
+  - 5110_54320.ply
+  - 5110_54475.ply
+  - 5080_54435.ply
+  - 5105_54460.ply
+  - 5105_54405.ply
+  - 5165_54395.ply
+  - 5180_54485.ply
+  - 5110_54460.ply
+  use_cache: true
+  val_files:
+  - 5100_54440.ply
+  - 5100_54490.ply
+  - 5135_54430.ply
+  - 5140_54390.ply
+  - 5080_54470.ply
+  - 5150_54325.ply
+  - 5135_54435.ply
+  - 5155_54335.ply
+  - 5175_54395.ply
+  - 5120_54445.ply
+  - 5080_54400.ply
+  steps_per_epoch_train: 500
+  steps_per_epoch_valid: 50
+model:
+  name: RandLANet
+  batcher: DefaultBatcher
+  optimizer:
+    lr: 0.01
+  ckpt_path: # path/to/your/checkpoint
+  num_neighbors: 16
+  num_layers: 5
+  num_points: 65536
+  num_classes: 9
+  ignored_label_inds: [0]
+  sub_sampling_ratio: [4, 4, 4, 4, 2]
+  in_channels: 3
+  dim_features: 8
+  dim_output: [16, 64, 128, 256, 512]
+  grid_size: 0.04
+  augment:
+    recenter:
+      dim: [0, 1, 2]
+    normalize:
+      points:
+        method: linear
+pipeline:
+  name: SemanticSegmentation
+  optimizer:
+    lr: 0.01
+  batch_size: 16
+  logs_dir: ./logs2
+  max_epoch: 800
+  save_ckpt_freq: 10
+  scheduler_gamma: 0.99
+  test_batch_size: 1
+  train_sum_dir: train_log
+  val_batch_size: 4
+  summary:
+    record_for: []
+    max_pts:
+    use_reference: false
+    max_outputs: 1
+optimizer:
+  lr: 0.01
