@@ -1,0 +1,57 @@
+dataset:
+  name: Essen_aerial_vertical_221
+  dataset_path: ./Essen/aerial/vertical
+  cache_dir: ./logs/cache/
+  class_weights: [33266, 1710483, 203394, 1788, 449804, 6308, 4410]
+  ignored_label_inds: [0]
+  num_points: 65536
+  test_result_folder: ./test
+  train_dir: ./train
+  val_dir: ./validation
+  test_dir: ./test
+  use_cache: False
+  steps_per_epoch_train: 500
+  steps_per_epoch_valid: 20
+model:
+  name: RandLANet
+  batcher: DefaultBatcher
+  ckpt_path: # path/to/your/checkpoint
+  num_neighbors: 32
+  num_layers: 5
+  num_points: 65536
+  num_classes: 7
+  ignored_label_inds: [0]
+  sub_sampling_ratio: [4, 4, 4, 4, 2]
+  in_channels: 4
+  dim_features: 8
+  dim_output: [16, 64, 128, 256, 512]
+  grid_size: 0.04
+  augment:
+    recenter:
+      dim: [0, 1, 2]
+    normalize:
+      feat:
+        method: linear
+        bias: 0
+        scale: 255
+      points:
+        method: linear
+pipeline:
+  name: SemanticSegmentation
+  optimizer:
+    lr: 0.001
+  batch_size: 4
+  main_log_dir: ./logs
+  max_epoch: 250
+  save_ckpt_freq: 10
+  scheduler_gamma: 0.9886
+  test_batch_size: 1
+  train_sum_dir: train_log
+  val_batch_size: 2
+  num_workers: 0
+  pin_memory: False
+  summary:
+    record_for: []
+    max_pts:
+    use_reference: false
+    max_outputs: 1

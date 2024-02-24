@@ -1909,7 +1909,7 @@ def kernel_point_optimization_debug(radius,
 def load_kernels(radius, num_kpoints, dimension, fixed, lloyd=False):
 
     # Kernel directory
-    kernel_dir = 'kernels/dispositions'
+    kernel_dir = 'kernels/dispositions2'
     if not exists(kernel_dir):
         makedirs(kernel_dir)
 

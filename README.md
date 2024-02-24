@@ -20,6 +20,17 @@ Open3D-ML works with **TensorFlow** and **PyTorch** to integrate easily into
 existing projects and also provides general functionality independent of
 ML frameworks such as data visualization.
 
+
+## Changes in this fork
+In this fork we added configurations and data loader scripts for the DALES dataset and our new intorduced Essen-ALS and Essen-MLS dataset.
+Further we did small adjustements in the weight calculations and the models itself. 
+
+To use this code it is important to run the following script in this folder:
+
+```
+source set_opend3d_ml_root.sh
+```
+
 ## Installation
 
 ### Users

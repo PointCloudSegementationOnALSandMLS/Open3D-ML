@@ -1,0 +1,150 @@
+dataset:
+  name: dales_kpconv
+  dataset_path: # set dataset path
+  cache_dir: ./logs/cache
+  class_weights: [6997560, 178021561, 120818120, 2583281, 748890, 799886, 1512927, 276924, 56908533]
+  ignored_label_inds:
+  - 0
+  test_files:
+  - 5100_54440.ply
+  - 5100_54490.ply
+  - 5135_54430.ply
+  - 5140_54390.ply
+  - 5080_54470.ply
+  - 5150_54325.ply
+  - 5135_54435.ply
+  - 5155_54335.ply
+  - 5175_54395.ply
+  - 5120_54445.ply
+  - 5080_54400.ply
+  test_result_folder: ./test
+  train_files:
+  - 5145_54460.ply
+  - 5100_54495.ply
+  - 5180_54435.ply
+  - 5185_54485.ply
+  - 5095_54455.ply
+  - 5190_54400.ply
+  - 5145_54480.ply
+  - 5160_54330.ply
+  - 5130_54355.ply
+  - 5095_54440.ply
+  - 5145_54340.ply
+  - 5085_54320.ply
+  - 5135_54495.ply
+  - 5145_54405.ply
+  - 5150_54340.ply
+  - 5140_54445.ply
+  - 5185_54390.ply
+  - 5145_54470.ply
+  - 5110_54495.ply
+  - 5115_54480.ply
+  - 5165_54390.ply
+  - 5110_54320.ply
+  - 5110_54475.ply
+  - 5080_54435.ply
+  - 5105_54460.ply
+  - 5105_54405.ply
+  - 5165_54395.ply
+  - 5180_54485.ply
+  - 5110_54460.ply
+  use_cache: true
+  val_files:
+  - 5100_54440.ply
+  - 5100_54490.ply
+  - 5135_54430.ply
+  - 5140_54390.ply
+  - 5080_54470.ply
+  - 5150_54325.ply
+  - 5135_54435.ply
+  - 5155_54335.ply
+  - 5175_54395.ply
+  - 5120_54445.ply
+  - 5080_54400.ply
+  steps_per_epoch_train: 500
+  steps_per_epoch_valid: 50
+model:
+  name: KPFCNN
+  ckpt_path: # path/to/your/checkpoint
+  KP_extent: 1.0
+  KP_influence: linear
+  aggregation_mode: sum
+  architecture: [
+  'simple',
+  'resnetb',
+  'resnetb_strided',
+  'resnetb',
+  'resnetb_strided',
+  'resnetb_deformable',
+  'resnetb_deformable_strided',
+  'resnetb_deformable',
+  'resnetb_deformable_strided',
+  'resnetb_deformable',
+  'nearest_upsample',
+  'unary',
+  'nearest_upsample',
+  'unary',
+  'nearest_upsample',
+  'unary',
+  'nearest_upsample',
+  'unary']
+  reduce_fc: true
+  augment_color: 1.0
+  augment_noise: 0.01
+  augment_rotation: vertical
+  augment_scale_anisotropic: true
+  augment_scale_max: 1.1
+  augment_scale_min: 0.9
+  augment_symmetries:
+  - true
+  - false
+  - false
+  batch_limit: 20000
+  grad_clip_norm: 100.0
+  batch_norm_momentum: 0.98
+  batcher: ConcatBatcher
+  conv_radius: 2.5
+  deform_fitting_mode: point2point
+  deform_fitting_power: 1.0
+  deform_radius: 6.0
+  density_parameter: 5.0
+  first_features_dim: 128
+  first_subsampling_dl: 0.250
+  fixed_kernel_points: center
+  ignored_label_inds: [0]
+  in_features_dim: 1
+  in_points_dim: 3
+  l_relu: 0.2
+  in_radius: 20.0
+  lbl_values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  min_in_points: 10000
+  max_in_points: 17000
+  modulated: false
+  num_classes: 9
+  num_kernel_points: 15
+  num_layers: 5
+  repulse_extent: 1.2
+  use_batch_norm: true
+pipeline:
+  name: SemanticSegmentation
+  adam_lr: 0.01
+  momentum: 0.98
+  batch_size: 10
+  learning_rate: 0.01
+  lr_decays: 0.98477
+  deform_lr_factor: 0.1
+  main_log_dir: ./logs
+  max_epoch: 500
+  save_ckpt_freq: 5
+  scheduler_gamma: 0.95
+  test_batch_size: 1
+  train_sum_dir: train_log
+  val_batch_size: 4
+  weight_decay: 0.001
+  num_workers: 0
+  pin_memory: False
+  summary:
+    record_for: []
+    max_pts:
+    use_reference: false
+    max_outputs: 1

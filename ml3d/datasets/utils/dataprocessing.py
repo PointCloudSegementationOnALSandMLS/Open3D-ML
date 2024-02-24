@@ -166,11 +166,9 @@ class DataProcessing:
     def get_class_weights(num_per_class):
         # pre-calculate the number of points in each category
         num_per_class = np.array(num_per_class, dtype=np.float32)
-
         weight = num_per_class / float(sum(num_per_class))
-        ce_label_weight = 1 / (weight + 0.02)
-
-        return ce_label_weight
+        result = np.divide(1, weight, out=np.zeros_like(num_per_class, dtype=float), where=(weight != 0))
+        return result
 
     @staticmethod
     def invT(T):
