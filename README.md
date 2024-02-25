@@ -25,6 +25,11 @@ ML frameworks such as data visualization.
 In this fork we added configurations and data loader scripts for the DALES dataset and our new intorduced Essen-ALS and Essen-MLS dataset.
 Further we did small adjustements in the weight calculations and the models itself. 
 
+The configurations can be found here: ml3d/configs/configs
+The data loader scripts are inside this folder: ml3d/datasets
+
+Additionally we implemented two scipts: train_dataset.py and inference_dataset.py. These scripts were used for training and inferencing and we found that those scipts are missing in this repository.
+
 To use this code it is important to run the following script in this folder:
 
 ```
